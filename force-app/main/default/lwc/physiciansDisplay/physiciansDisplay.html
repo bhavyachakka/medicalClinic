@@ -1,0 +1,34 @@
+<!--
+@name		: physicianDisplay
+@description: To display the physicians
+@author		: Bhavya Chakka
+@date		: 2020-08-01
+******************************************************
+History of changes
+******************************************************
+Bhavya Chakka	2020-08-01		initial version
+******************************************************	
+-->
+<template>
+    <div class = {tileClass}>
+        <lightning-card class ="tile" onclick ={selectPhysician}>  
+            <div class="slds-media" >
+                <div class="slds-media__figure slds-p-left_medium">
+                    <img src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" 
+                        alt={physician.Name} 
+                        class="slds-avatar slds-avatar_circle avatar"
+                        ></img>
+                </div>
+                <div class="slds-media__body slds-p-top_medium">
+                    <h1 class="slds-m-bottom_xx-small slds-truncate" title={physician.Name}>
+                        {physician.Name}
+                    </h1>
+                    <h1 class="slds-m-bottom_xx-small " title={physician.Phone__c}>
+                        {physician.Phone__c}</h1>
+                    <h1 class="slds-m-bottom_xx-small" title={physician.Specialization__r.Price__c}>
+                        {labelFee}:{physician.Specialization__r.Price__c}</h1>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template>

@@ -1,0 +1,208 @@
+<!-- 
+@name		: fullcalendar
+@description: Lightning web component using Fullcalendar.io js library to display most recent events
+@jslibrary  : https://fullcalendar.io/ 
+@author		: Bhavya Chakka
+@date		: 2020-08-01
+******************************************************
+History of changes
+******************************************************
+Bhavya Chakka	2020-08-01		initial version
+******************************************************
+-->
+<template>
+     <!-- Spinner to show on waiting screens -->
+    <template if:true={openSpinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+   <div class="slds-grid slds-wrap slds-theme_default">
+        <div class="slds-col slds-size_12-of-12">
+            <!-- fullcalendar sits in this div -->
+            <div id="calendar" class="fullcalendarjs"></div>
+        </div>
+   </div>
+   <!-- Open a modal with new event form  -->
+   <template if:true={openModal}>
+        <div data-modal="custommodal" class="modalclass">
+            <section
+                role="dialog"
+                tabindex="-1"
+                aria-labelledby="modal-heading-01"
+                aria-modal="true"
+                aria-describedby="modal-content-id-1"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning-button-icon icon-name="utility:close" 
+                                                class="slds-modal__close " 
+                                                alternative-text="Close" 
+                                                title="Close"
+                                                size="large"
+                                                variant="bare-inverse"
+                                                onclick={handleCancel} >
+
+                        </lightning-button-icon>
+                        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">
+                            New Appointment
+                        </h2>
+                    </header>
+                    <!-- Form to create appointment -->
+                    <div class="slds-modal__content slds-p-around_medium"
+                        id="modal-content-id-1">
+                        <lightning-button variant={isnewpatient} label="New Patient" 
+                                            title="New Patient" onclick={handleNewPatient} 
+                                            class="slds-m-left_x-small">
+                        </lightning-button>
+                        <lightning-button variant={isexistingpatient} label="Existing Patient" 
+                                            title="Existing Patient" onclick={handleExistingPatient} 
+                                            class="slds-m-right_x-small">
+                        </lightning-button>
+                    
+                        <lightning-accordion allow-multiple-sections-open class="example-accordion" 
+                                                active-section-name={activeSections}>
+                            <lightning-accordion-section name="appointment" 
+                                                            label="Appointment Details">
+                                <lightning-record-edit-form object-api-name='Appointment__c' 
+                                                            onsuccess={handleSuccess}             
+                                                            onsubmit={handleSubmit}>
+                                    <lightning-input label="Reason For Appointment" 
+                                                        name="appointmentreason" 
+                                                        type="text" 
+                                                        value={title}
+                                                        required 
+                                                        onkeyup={handleKeyup}>
+                                    </lightning-input>
+                                    <lightning-input label="Start Date" name="start" 
+                                                        type="datetime" required value={startDate} >
+                                    </lightning-input>
+                                    <lightning-input label="End Date" name="end" 
+                                                    type="datetime" required value={endDate}>
+                                    </lightning-input>
+
+                                    <template if:false={newpatient}>
+                                        <lightning-input-field field-name="Patient__c">
+                                        </lightning-input-field>
+                                        <template if:true={openInnerSpinner}>
+                                            <lightning-spinner alternative-text="Loading" size="medium">
+                                            </lightning-spinner>
+                                        </template>
+                                        <div class="slds-align_absolute-center" style="margin-top: 5px">
+                                            <lightning-button 
+                                                class="slds-m-top_small"
+                                                icon-name="utility:save"
+                                                type="submit"
+                                                label="Submit">
+                                                </lightning-button>
+                                        </div>
+                                    </template>
+                                </lightning-record-edit-form>
+                            </lightning-accordion-section>
+
+                            <template if:true={newpatient}>
+                                <lightning-accordion-section name="patient" label="Patient Details">
+                                    <c-appointment-form start-date={startDate} end-date={endDate}
+                                                        appointment-reason={title} 
+                                                        selected-physician-id={selectedPhysicianId}
+                                                        selected-physician-email={selectedPhysicianEmail}
+                                                        oncalendarevent={handleSave}>
+                                    </c-appointment-form>
+                                </lightning-accordion-section>
+                            </template> 
+                        </lightning-accordion>   
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open">
+            </div>
+        </div>   
+    </template>
+
+    <!-- To view the booked appointment -->
+    <template if:true={openAppointmentForm}>
+        <div data-modal="custommodal" class="modalclass">
+            <section
+                    role="dialog"
+                    tabindex="-1"
+                    aria-labelledby="modal-heading-01"
+                    aria-modal="true"
+                    aria-describedby="modal-content-id-1"
+                    class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning-button-icon icon-name="utility:close" 
+                                                class="slds-modal__close " 
+                                                alternative-text="Close" 
+                                                title="Close"
+                                                size="large"
+                                                variant="bare-inverse"
+                                                onclick={handleCancel} >
+
+                        </lightning-button-icon>
+                        <h2  class="slds-modal__title slds-hyphenate">Appointment Details</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <!-- Record view form to show appointment details -->
+                        <lightning-record-view-form object-api-name='Appointment__c' 
+                                                        record-id={appointmentId}>
+                            <lightning-layout multiple-rows vertical-align="start">
+                                <lightning-layout-item size="6" padding="horizontal-small">
+                                    <div class="slds-form-element">
+                                        <lightning-output-field 
+                                                class="slds-form-element__label" 
+                                                field-name="Start_Time__c"
+                                                label="Start_Time__c"
+                                                >
+                                        </lightning-output-field>
+                                    </div>          
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="horizontal-small">
+                                    <div class="slds-form-element">
+                                        <lightning-output-field 
+                                                class="slds-form-element__label" 
+                                                field-name="End_Time__c"
+                                                label="End_Time__c"
+                                                >
+                                        </lightning-output-field>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="horizontal-small">
+                                    <div class="slds-form-element">
+                                        <lightning-output-field 
+                                                class="slds-form-element__label" 
+                                                field-name="Patient__c"
+                                                label="Patient__c"
+                                                >
+                                        </lightning-output-field>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="horizontal-small">
+                                    <lightning-output-field 
+                                            class="slds-form-element__label" 
+                                            field-name="Physician__c"
+                                            label="Physician__c"
+                                            >
+                                    </lightning-output-field>
+                                </lightning-layout-item>      
+                            </lightning-layout>
+                            <template if:true={openInnerSpinner}>
+                                <lightning-spinner alternative-text="Loading" size="medium">
+                                </lightning-spinner>
+                            </template>
+                            <div class="slds-align_absolute-center" 
+                                 style="margin-top: 5px">
+                                <lightning-button 
+                                                class="slds-m-top_small"
+                                                variant="destructive"
+                                                icon-name="utility:delete"
+                                                label="Cancel Appointment"
+                                                onclick={deleteAppointment}>
+                                </lightning-button>
+                            </div>
+                        </lightning-record-view-form>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>

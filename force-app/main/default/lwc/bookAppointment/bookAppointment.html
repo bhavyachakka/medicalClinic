@@ -1,0 +1,55 @@
+<!--
+@name		: bookAppointment
+@description: To book an appontiment by receiptionist
+@author		: Bhavya Chakka
+@date		: 2020-08-01
+******************************************************
+History of changes
+******************************************************
+Bhavya Chakka	2020-08-01		initial version
+******************************************************	
+-->
+<template>
+
+	<!-- Spinner to show on waiting screens -->
+	<template if:true={openSpinner}>
+		 <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+	</template> 
+
+	<!--List of physicians with filter -->
+  	<div class="slds-grid slds-wrap slds-theme_default">
+		<div class="slds-col slds-size_3-of-12">
+			<div class=" slds-p-around_medium slds-border_right slds-scrollable_y" style="height:800px">
+				<lightning-card > 
+					<p class="slds-var-p-horizontal_small">
+						<!-- Specialization select search goes here -->
+						<c-specialization-type onsearch ={searchPhysicians}></c-specialization-type >
+					</p>
+				</lightning-card>
+			   <!--Iterating eachphysician record-->
+			   <template if:true={physician.data}>
+				  	<template for:each={physician.data} for:item="eachphysician">
+						<div   key ={eachphysician.Id} >
+							<!-- Physician display component -->
+							<c-physicians-display physician={eachphysician} 
+												  onphysicianselect={fetchPhysicianCalendar}
+												  selected-physician-id={selectedPhysicianId}>
+							</c-physicians-display>
+						</div>
+					</template>
+			  	</template>
+			</div>
+		</div>
+		<div class="slds-col slds-size_9-of-12">
+			<template if:false = {openCalendar}>
+				<h1 class="slds-align_absolute-center calendar">{displayMessage}</h1>
+			</template>
+		      <!-- fullcalendar sits in this div -->
+			<template if:true = {openCalendar}>
+				<c-fullcalendar selected-physician-id={selectedPhysicianId} 
+								selected-physician-email={selectedPhysicianEmail}>
+				</c-fullcalendar>
+			</template>
+		</div>
+  	</div>
+</template>

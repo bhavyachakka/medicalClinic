@@ -1,0 +1,23 @@
+<!--
+@name		    : specializationType
+@description: To get the different specialization records
+@author	  	: Bhavya Chakka
+@date	    	: 2020-08-01
+******************************************************
+History of changes
+******************************************************
+Bhavya Chakka	2020-08-01		initial version
+******************************************************	
+-->
+<template>
+  <lightning-layout horizontal-align="center">
+    <lightning-layout-item class="slds-align-middle">
+      <lightning-combobox class="slds-align-middle"
+                          label={labelSpecialization}
+                          value={selectedTypeId}
+                          options={searchOptions}
+                          onchange={handleSearchOptionChange}>
+      </lightning-combobox>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

@@ -1,0 +1,14 @@
+.tile {
+    padding-left: 10px;
+    margin: 20px;
+  }
+  .avatar{
+    height:100px;
+    width:100px
+  }
+
+  .selected {
+    border: 3px solid rgb(0, 95, 178);
+    border-radius: 5px;
+  }
+

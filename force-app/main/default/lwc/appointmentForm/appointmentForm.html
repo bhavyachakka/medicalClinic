@@ -1,0 +1,88 @@
+<!--
+@name		: appointmentForm
+@description: To display the appointment form
+@author		: Bhavya Chakka
+@date		: 2020-08-01
+******************************************************
+History of changes
+******************************************************
+Bhavya Chakka	2020-08-01		initial version
+******************************************************	
+-->
+<template>
+  <!-- lightning data service code -->
+    <!-- <lightning-record-edit-form> -->
+    <lightning-record-edit-form 
+          object-api-name="Patient__c" 
+          onsuccess={handleSuccess}
+          onsubmit={handleSubmit}>
+        <lightning-messages></lightning-messages>
+        <lightning-layout multiple-rows vertical-align="start">
+            <lightning-layout-item size="12" padding="horizontal-small">
+                <div class="slds-form-element">
+                    <lightning-input-field 
+                            class="slds-form-element__label" 
+                            field-name="Full_Name__c"
+                            label="Full Name"
+                            required>
+                    </lightning-input-field>
+                </div>          
+            </lightning-layout-item>
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <div class="slds-form-element">
+                    <lightning-input-field 
+                            class="slds-form-element__label" 
+                            field-name="Salutation__c"
+                            label="Salutation"
+                            varaint="label-hidden"
+                            required>
+                    </lightning-input-field>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <div class="slds-form-element">
+                    <lightning-input-field 
+                            class="slds-form-element__label" 
+                            field-name="Age__c"
+                            label="Age"
+                            varaint="label-hidden"
+                            required>
+                    </lightning-input-field>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-input-field 
+                        class="slds-form-element__label" 
+                        field-name="Email__c"
+                        label="Email"
+                        varaint="label-hidden"
+                        required>
+                </lightning-input-field>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-input-field 
+                        class="slds-form-element__label" 
+                        field-name="Mobile_No__c"
+                        label="Mobile_No"
+                        varaint="label-hidden"
+                        required>
+                </lightning-input-field>
+            </lightning-layout-item>       
+        </lightning-layout>
+        <!-- Spinner on submission -->
+        <template if:true={openInnerSpinner}>
+            <lightning-spinner alternative-text="Loading" size="medium">
+            </lightning-spinner>
+        </template>
+        <!-- To submit patient record -->
+        <div class="slds-align_absolute-center" style="margin-top: 5px">
+            <lightning-button 
+             class="slds-m-top_small"
+             icon-name="utility:save"
+             type="submit"
+             label="Submit">
+            </lightning-button>
+        </div>
+    </lightning-record-edit-form>
+</template>
+  
