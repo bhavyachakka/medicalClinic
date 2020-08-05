@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Google_Calendar_Appointment_Delete</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Appointment_Delete</shortDescription>
+        <value>Appointment Cancelled</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Appointment_Delete_Title</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Appointment_Delete_Title</shortDescription>
+        <value>Appointment cannot be cancelled</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Appointment_Form_Title</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Appointment_Form_Title</shortDescription>
+        <value>Error creating  Appointment</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Appointment_Private</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Appointment_Private</shortDescription>
+        <value>This is an private booking,booking cannot be viewed or edited</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Appointment_Retrive</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Appointment_Retrive</shortDescription>
+        <value>Cannot retrive appointment details</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Book_Appointment_Title</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Book_Appointment_Title</shortDescription>
+        <value>Unable to retrieve calendar</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Description</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Description</shortDescription>
+        <value>Your appointment has been booked with patient</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Display_Message</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Display_Message</shortDescription>
+        <value>Please select the physician to book appointment</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Display_Physician_Message</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Display_Physician_Message</shortDescription>
+        <value>Please request the physician to share the calendar to book appointment</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Fee</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Fee</shortDescription>
+        <value>Fee:</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Load_Error</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Load_Error</shortDescription>
+        <value>Error Loading Full Calendar</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Location</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Location</shortDescription>
+        <value>At Hospital</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Select_Specialization</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google_Calendar_Select_Specialization</shortDescription>
+        <value>Select the Specialization</value>
+    </labels>
+    <labels>
+        <fullName>Google_Calendar_Summary</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Google Calendar Summary</shortDescription>
+        <value>Appointment Booked</value>
+    </labels>
+    <labels>
+        <fullName>Google_Specialization_ErrorMessage</fullName>
+        <categories>Google Calendar</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GoogleSpecializationErrorMessage</shortDescription>
+        <value>Error retriving data</value>
+    </labels>
+</CustomLabels>
